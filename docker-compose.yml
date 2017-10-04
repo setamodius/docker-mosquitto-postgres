@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile-mosquitto
     container_name: "broker-mosq"
     volumes:
-    - $./mqtt.conf:/etc/mosquitto/mosquitto.conf 
+    - ./mqtt.conf:/etc/mosquitto/mosquitto.conf 
     ports:
     - "1883:1883"
     - "1884:1884"
@@ -26,7 +26,7 @@ services:
     depends_on:
     - mqtt_db
     labels:
-    - "local.example.description=Mosquitto v1.4.10 MQTT server"
+    - "local.example.description=Mosquitto v1.4.14 MQTT server"
     command: ["./wait-for-postgres.sh", "mqtt_db", "mosquitto", "-c", "/etc/mosquitto/mosquitto.conf"]
 
 networks:

@@ -9,7 +9,7 @@ services:
     container_name: "postgres-mosq"
     networks:
     - mosqnet
-
+    
   mosquitto:
     restart: always
     build:
@@ -28,7 +28,22 @@ services:
     labels:
     - "local.example.description=Mosquitto v1.4.14 MQTT server"
     command: ["./wait-for-postgres.sh", "mqtt_db", "mosquitto", "-c", "/etc/mosquitto/mosquitto.conf"]
-
+  
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile-flask
+    links:
+      - "mqtt_db"
+    ports:
+    - "5000:5000"
+    container_name: "flask-mosq"
+    networks:
+    - mosqnet
+    depends_on:
+    - mqtt_db
+    
+    
 networks:
   mosqnet:
 

@@ -5,7 +5,9 @@ import dbmanager
 import Model
 
 app = FlaskAPI(__name__)
-myDb = dbmanager.Connection("postgres-mosq", "postgres", 5432, "postgres", "password")
+# dbhost = "postgres-mosq"
+dbhost = "10.3.4.241"
+myDb = dbmanager.Connection(dbhost, "postgres", 5432, "postgres", "password")
 
 
 def user_repr(username):
@@ -51,7 +53,20 @@ def user_detail(username):
     Retrieve, update or delete users.
     """
     if request.method == 'PUT':
-        return '', status.HTTP_406_NOT_ACCEPTABLE
+        new_password = str(request.data.get('password', ''))
+        full_name = str(request.data.get('name', ''))
+        privileges = str(request.data.get('privileges', ''))
+        if get_user(username) is None:
+            return '', status.HTTP_404_NOT_FOUND
+        hashed_password = hp.make_hash(new_password)
+        row_count = myDb.execute_rowcount(
+            "UPDATE users SET password = %s, name = %s, privilege = %s WHERE username = %s;",
+            hashed_password, full_name, privileges, username)
+        if row_count == 1:
+            myDb.commit()
+            return user_repr(username), status.HTTP_200_OK
+        else:
+            return user_repr(username), status.HTTP_409_CONFLICT
 
     elif request.method == 'DELETE':
         row_count = myDb.execute_rowcount("DELETE FROM users WHERE username = %s", username)

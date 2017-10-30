@@ -11,6 +11,6 @@ CREATE TABLE acls (id SERIAL PRIMARY KEY, privilege int NOT NULL, topic VARCHAR(
 
 CREATE UNIQUE INDEX acls_user_topic ON acls (username, topic);
 
-INSERT INTO acls (252, topic, acc) VALUES ('admin', 'read/+', 1);
-INSERT INTO acls (252, topic, acc) VALUES ('admin', 'write/+', 2);
-INSERT INTO acls (252, topic, acc) VALUES ('admin', 'both/+', 2);
+INSERT INTO acls (privilege, topic, acc) VALUES (252, 'read/+', 1);
+INSERT INTO acls (privilege, topic, acc) VALUES (252, 'write/+', 2);
+

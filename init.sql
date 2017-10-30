@@ -9,7 +9,7 @@ insert into users(username, password, name, privilege, super) values('master', '
 DROP TABLE IF EXISTS acls;
 CREATE TABLE acls (id SERIAL PRIMARY KEY, privilege int NOT NULL, topic VARCHAR(256) NOT NULL, acc smallint NOT NULL DEFAULT 1);
 
-CREATE UNIQUE INDEX acls_user_topic ON acls (username, topic);
+CREATE UNIQUE INDEX acls_user_topic ON acls (privilege, topic);
 
 INSERT INTO acls (privilege, topic, acc) VALUES (252, 'read/+', 1);
 INSERT INTO acls (privilege, topic, acc) VALUES (252, 'write/+', 2);

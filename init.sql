@@ -7,10 +7,10 @@ insert into users(username, password, name, privilege, super) values('master', '
 
 
 DROP TABLE IF EXISTS acls;
-CREATE TABLE acls (id SERIAL PRIMARY KEY, username VARCHAR(25) NOT NULL, topic VARCHAR(256) NOT NULL, acc smallint NOT NULL DEFAULT 1);
+CREATE TABLE acls (id SERIAL PRIMARY KEY, privilege int NOT NULL, topic VARCHAR(256) NOT NULL, acc smallint NOT NULL DEFAULT 1);
 
 CREATE UNIQUE INDEX acls_user_topic ON acls (username, topic);
 
-INSERT INTO acls (username, topic, acc) VALUES ('admin', 'read/+', 1);
-INSERT INTO acls (username, topic, acc) VALUES ('admin', 'write/+', 2);
-INSERT INTO acls (username, topic, acc) VALUES ('admin', 'both/+', 3);
+INSERT INTO acls (252, topic, acc) VALUES ('admin', 'read/+', 1);
+INSERT INTO acls (252, topic, acc) VALUES ('admin', 'write/+', 2);
+INSERT INTO acls (252, topic, acc) VALUES ('admin', 'both/+', 2);

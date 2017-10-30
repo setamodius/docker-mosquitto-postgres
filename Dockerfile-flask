@@ -1,11 +1,11 @@
 FROM python:3
 MAINTAINER Kerem Bilgicer <krmbil@gmail.com>
 EXPOSE 5000
-ADD /mqttapi/requirements.txt /
-ADD /mqttapi/dbmanager.py /
-ADD /mqttapi/hashing_passwords.py /
-ADD /mqttapi/Model.py /
-ADD /mqttapi/pbkdf2.py /
-ADD /mqttapi/UserApi.py /
+ADD /Mqtt-Api/requirements.txt /
+ADD /Mqtt-Api/dbmanager.py /
+ADD /Mqtt-Api/hashing_passwords.py /
+ADD /Mqtt-Api/Model.py /
+ADD /Mqtt-Api/pbkdf2.py /
+ADD /Mqtt-Api/UserApi.py /
 RUN pip install -U -r requirements.txt 
 CMD [ "python", "./UserApi.py" ]

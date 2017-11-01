@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile-mosquitto
     container_name: "broker-mosq"
     volumes:
-    - ./mqtt.conf:/etc/mosquitto/mosquitto.conf 
+    - ./mqtt.conf:/etc/mosquitto/mosquitto.conf
     ports:
     - "1883:1883"
     - "1884:1884"
